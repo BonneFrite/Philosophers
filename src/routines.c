@@ -6,7 +6,7 @@
 /*   By: vpozo <vpozo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 18:16:42 by vpozo             #+#    #+#             */
-/*   Updated: 2025/06/19 07:12:47 by vpozo            ###   ########.fr       */
+/*   Updated: 2025/06/19 08:48:35 by vpozo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	do_some_thinking(t_philos *philo, t_waiter *waiter, bool init)
 {
 	time_t	reflecting;
 
-	pthread_mutex_lock(&philo->meal_lock);
 		//	reflecting = ((waiter->ttdie - (time_in_ms() - \
 	//				philo->last_meal + waiter->tteat)));
 	if ((waiter->nbphilos % 2) && (waiter->tteat >= waiter->ttsleep))
@@ -70,7 +69,6 @@ void	do_some_thinking(t_philos *philo, t_waiter *waiter, bool init)
 	if (!init)
 		display_status(philo, waiter, THINKING);
 	try_to_sleep(reflecting, waiter);
-	pthread_mutex_unlock(&philo->meal_lock);
 }
 
 void	*kill_philos(void *data)
